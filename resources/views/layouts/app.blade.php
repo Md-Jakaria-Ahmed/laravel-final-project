@@ -30,6 +30,9 @@
                 <a href="{{ url('post') }}" class="text-dark font-weight-blod" style="text-decoration: none;">
                      <h5 class="m-auto">Blog-page</h5>
                 </a>
+                <a href="{{ url('users') }}" class="text-dark font-weight-blod ml-3" style="text-decoration: none;">
+                     <h5 class="m-auto">User-List</h5>
+                </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>

@@ -17,13 +17,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('post','BlogController@index');
-Route::post('blog/post_page', 'BlogController@post');
-Route::get('post/edit/{id}','BlogController@edit');
+Route::get('post',              'BlogController@index');
+Route::post('blog/post_page',   'BlogController@post');
+Route::get('post/edit/{id}',    'BlogController@edit');
 Route::post('post/update/{id}', 'BlogController@update');
-Route::get('post/delete/{id}', 'BlogController@delete');
+Route::get('post/destroy/{id}', 'BlogController@destroy');
 
+Route::get('comment/destroy/{id}', 'HomeController@destroy');
+
+/* user list*/
+Route::get('users',             'UserController@index');
+/*comments*/
+Route::post('blog/comment',     'HomeController@post');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home',             'HomeController@index')->name('home');

@@ -4,8 +4,11 @@
   <title>Blog post</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+
 
 </head>
 <body>
@@ -19,52 +22,11 @@
                     {{ config('app.name', 'Blog') }}
                    
                 </a>
-                <a href="{{ url('post') }}" class="text-dark font-weight-blod" style="text-decoration: none;">
-                     <h5 class="m-auto">Blog-page</h5>
-                </a>
+    
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown float-right">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
             </div>
         </nav>
 
@@ -86,10 +48,25 @@
         <h6 class="m-0 font-weight-bold">Post List:</h6>
     </div>
     <div class="card-body">
+
         <div class="table-responsive">
 
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                <thead>
+{{--                                  --}}
+
+<div class="col-md-4 float-right d-block-inline">
+
+    <div class="input-group mb-3">  
+      <input type="text" class="form-control" placeholder="search post" >
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="search">search</span>
+      </div>
+    </div>
+
+</div>
+{{-- ================================= --}}
+
+            <table class="table table-bordered"  width="100%" cellspacing="0">
+                <thead class="bg-dark text-light text-center">
                     <tr>
                         <th scope="col">Sr.</th>
                         <th scope="col">Title</th>
@@ -107,8 +84,10 @@
                       <td>{{ $post->title }}</td>
                       <td>{{ $post->description }}</td>
                       <td>
-                        <a href="{{ url('post/edit/'.$post->id) }}" class="btn btn-primary">Edit</a>
-                        <a href="{{ url('post/delete/'.$post->id) }}" onclick="return confirm('Are you sure ?')" class="btn btn-danger">Delete</a>
+                        <a href="{{ url('post/edit/'.$post->id) }}" class="btn btn-primary btn-sm">Edit <i class="fa fa-edit"></i></a>
+
+                        <a href="{{ url('post/destroy/'.$post->id) }}" onclick="return confirm('Are you sure ?')" class="btn btn-sm btn-danger">
+                        Delete <i class="fa fa-trash"></i></a>
                       </td>
                     </tr>
                   @endforeach
@@ -127,20 +106,23 @@
       </div>
   @if(session('success'))
 
-      <div class="alert alert-success alert-dismissible fade show" role="alert">
+      {{-- <div class="alert alert-success alert-dismissible fade show" role="alert">
         <strong>{{ session('success') }}</strong>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
+      </div> --}}
+
+      <div class="alert alert-success alert-dismissible">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <strong>{{ session('success') }}</strong>
       </div>
  @endif
    @if(session('delete'))
 
-      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      <div class="alert alert-danger alert-dismissible">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         <strong>{{ session('delete') }}</strong>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
       </div>
  @endif
 
@@ -157,7 +139,7 @@
             </div>
             <div class="form-group mb-2">
               <label for="exampleInputEmail1">Description</label>
-              <textarea class="form-control  @error('description') is-invalid @enderror" id="exampleInputEmail1"  name="description">
+              <textarea class="form-control  @error('description') is-invalid @enderror" id="exampleInputEmail1" style="text-align: left;"  name="description">
               </textarea>
                @error('description')
                 <strong class="text-danger">{{ $message }}</strong>
@@ -171,7 +153,12 @@
   </div>
 </div>
 
+
+ <a href="{{ url('home') }}" class="btn btn-dark" style="text-decoration: none;font-weight: bold;"> <i class="fa fa-arrow-left" aria-hidden="true"></i> Back</a>
+
 </div>
+
+
 
 </body>
 </html>

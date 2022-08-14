@@ -24,12 +24,22 @@ class BlogController extends Controller
     }
 
 
-
+/*==================  get all data from post  ================*/
     public function index()
     {
         $posts = Blog::latest()->get();
         return view('post',compact('posts'));
     }
+
+
+/*==================  get all comment  ================*/
+    public function comment()
+    {
+        $comments = Blog::latest()->get();
+        return view('home',compact('comments'));
+    }
+
+
 
 
     public function edit($id)
@@ -63,11 +73,13 @@ class BlogController extends Controller
 
     /*================== delete post ====================*/
 
-    public function delete($id)
-    {
-       Blog::findOrFail('$id')->delete();
 
-        return redirect()->back()->with('delete','post has been deleted successfully...!');
+    public function destroy($id) {
+        
+        if (Blog::find($id)->delete()) {
+            Session()->flash('delete','Post Deleted Successfully..! ✔');
+        }
+        return redirect()->back();
     }
 
 
