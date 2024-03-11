@@ -1,0 +1,83 @@
+
+name: Scope Overview
+description: Track scopes e.i. Project ID, Project Scope, Dead Line, Deployed Date, Plugins Dependency, Assigned Developer, Developer Scope, ScreenCast, Core files Changes, QA Lead, Deploy Branch, Test Case
+labels: ["project_id", 'scope', "dead-line", "deployed-date", "staging-site-credential", "plugin-dependency", "assigned-developer", "developer-scope", "screencast", "core-file-change-log", "qa-lead", "git-branch", "test-case", "note"]
+projects: ["welabs-custom-plugin"]
+assignees:
+  - welabs
+body:
+  - type: input
+    id: project_id
+    attributes:
+      label: Project Scope ID
+      description: Project scope ID
+      value: ID
+  - type: textarea
+    id: project_scopes
+    attributes:
+      label: Project Scopes
+      description: Here are the Project Scopes   
+  - type: input
+    id: dead_line
+    attributes:
+      label: Dead Line
+      description: Project Dead Line
+  - type: input
+    id: deployed_date
+    attributes:
+      label: Deployed Date
+      description: Plugin Deployed Date
+  - type: textarea
+    id: developer
+    attributes:
+      label: Assigned Developer
+      description: Developer assign in this project.
+  - type: textarea
+    id: developer_scope
+    attributes:
+      label: Developer Working Scope
+      description: 
+  - type: textarea
+    id: screencast
+    attributes:
+      label: ScreenCast
+      description: Share screencast by following the client scope.
+  - type: textarea
+    id: core_file_change_log
+    attributes:
+      label: Core File Changes
+      description: Share the core file change log docs.
+  - type: input
+    id: qa-lead
+    attributes:
+      label: QA Lead
+      description: Who lead QA?
+  - type: input
+    id: git_branch
+    attributes:
+      label: Git Branch Name
+      description: This git branch is deployed on client site.
+  - type: textarea
+    id: test-case
+    attributes:
+      label: TestCase Docs
+      description: Please share test case.
+  - type: textarea
+    id: note
+    attributes:
+      label: Project Note
+      description: Project Notes
+  - type: textarea
+    id: plugin_dependency
+    attributes:
+      label: Plugin Dependency
+      value: |
+        1. Dokan Version: [e.g. v3.9.9]
+        2. Dokan Pro Version: [e.g. v3.9.10]
+        3. WooCommerce Version: [e.g. v8.5.2]
+        4. Projet Manger [e.g. v1.2.1]
+        5. Project Manager Pro [e.g. v1.2.1]
+        6. ERP [e.g. v1.12.0]
+        7. ERP Pro [e.g. v1.3.5]
+        8. Woocommerce Product Addons [e.g. v2.6.7]
+        9. Woocommerce Booking [e.g. v2.6.1]
